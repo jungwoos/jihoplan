@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-19T00:00:00.000Z",
+  "categories": [
+    { "id": "school", "label": "학교/유치원", "color": "#4f86c6" },
+    { "id": "academy", "label": "학원", "color": "#e8a33d" },
+    { "id": "play", "label": "놀이/약속", "color": "#5cb85c" },
+    { "id": "hospital", "label": "병원", "color": "#d9534f" },
+    { "id": "etc", "label": "기타", "color": "#8e7cc3" }
+  ],
+  "events": [
+    {
+      "id": "evt_sample_1",
+      "title": "유치원",
+      "start": "2026-06-19T09:00:00",
+      "end": "2026-06-19T14:00:00",
+      "allDay": false,
+      "categoryId": "school",
+      "color": "#4f86c6",
+      "location": "햇살유치원",
+      "notes": "체육복 입는 날",
+      "rrule": null
+    },
+    {
+      "id": "evt_sample_2",
+      "title": "피아노 학원",
+      "start": "2026-06-19T16:00:00",
+      "end": "2026-06-19T17:00:00",
+      "allDay": false,
+      "categoryId": "academy",
+      "color": "#e8a33d",
+      "location": "○○음악학원",
+      "notes": "교재 챙기기",
+      "rrule": null
+    },
+    {
+      "id": "evt_sample_3",
+      "title": "소아과 정기검진",
+      "start": "2026-06-22T10:30:00",
+      "end": "2026-06-22T11:30:00",
+      "allDay": false,
+      "categoryId": "hospital",
+      "color": "#d9534f",
+      "location": "튼튼소아과",
+      "notes": "예방접종 상담",
+      "rrule": null
+    },
+    {
+      "id": "evt_sample_4",
+      "title": "할머니댁 방문",
+      "start": "2026-06-20",
+      "end": null,
+      "allDay": true,
+      "categoryId": "play",
+      "color": "#5cb85c",
+      "location": "",
+      "notes": "1박 2일",
+      "rrule": null
+    }
+  ]
+}
