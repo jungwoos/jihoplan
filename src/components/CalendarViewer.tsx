@@ -31,10 +31,20 @@ export const CalendarViewer = forwardRef<FullCalendar, Props>(
         eventClick={onEventClick}
         height="auto"
         nowIndicator
-        scrollTime="09:00:00"
-        slotMinTime="06:00:00"
-        slotMaxTime="22:00:00"
+        scrollTime="08:00:00"
+        slotMinTime="08:00:00"
+        slotMaxTime="21:00:00"
         firstDay={0}
+        // Compact week/day headers ("14.일") and bare hour labels ("8") to
+        // minimize wrapping in narrow timegrid columns.
+        dayHeaderContent={(arg) => {
+          if (arg.view.type.startsWith('timeGrid')) {
+            const wd = ['일', '월', '화', '수', '목', '금', '토'][arg.date.getDay()]
+            return `${arg.date.getDate()}.${wd}`
+          }
+          return arg.text
+        }}
+        slotLabelContent={(arg) => String(arg.date.getHours())}
         // Per-view tuning: month hides the redundant time and caps stacked
         // events so chips stay readable on small screens.
         views={{
