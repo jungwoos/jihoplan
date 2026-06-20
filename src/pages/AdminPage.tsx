@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getPat, isUnlocked, lock, clearPat } from '../lib/auth'
+import { getPat, clearPat } from '../lib/auth'
 import { useAdminSchedule } from '../hooks/useAdminSchedule'
 import { toEventInputs } from '../lib/schedule'
 import { AdminLogin } from '../components/AdminLogin'
@@ -35,9 +35,9 @@ export function AdminPage() {
   const schedule = useAdminSchedule()
   const { file, load, upsertEvent, deleteEvent } = schedule
 
-  // Auto-resume if already unlocked with a stored token.
+  // Auto-resume if a token is already stored on this device (no password).
   useEffect(() => {
-    if (isUnlocked() && getPat()) {
+    if (getPat()) {
       setReady(true)
       void load()
     }
@@ -49,7 +49,6 @@ export function AdminPage() {
   if (!ready) {
     return (
       <AdminLogin
-        needsPassword={!isUnlocked()}
         onReady={() => {
           setReady(true)
           void load()
@@ -78,7 +77,6 @@ export function AdminPage() {
   }
 
   const signOut = () => {
-    lock()
     clearPat()
     setReady(false)
   }
