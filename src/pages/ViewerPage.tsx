@@ -12,7 +12,7 @@ import { CategoryLegend } from '../components/CategoryLegend'
 import { EventDetailPopover } from '../components/EventDetailPopover'
 
 export function ViewerPage() {
-  const { data, loading, error, reload } = useScheduleData()
+  const { data, loading, error } = useScheduleData()
   const isMobile = useIsMobile()
   const calendarRef = useRef<FullCalendar>(null)
   // Phones default to the list view (far more readable than a 7-column grid).
@@ -31,11 +31,9 @@ export function ViewerPage() {
   return (
     <div className="page">
       <header className="app-header">
-        <h1>지호 일정</h1>
+        <h1>지호</h1>
+        <ViewToggle value={view} onChange={changeView} />
         <div className="header-actions">
-          <button type="button" className="ghost-btn" onClick={() => void reload()}>
-            새로고침
-          </button>
           <Link to="/admin" className="ghost-btn">
             관리자
           </Link>
@@ -43,7 +41,6 @@ export function ViewerPage() {
       </header>
 
       <div className="toolbar">
-        <ViewToggle value={view} onChange={changeView} />
         <CategoryLegend categories={data.categories} />
       </div>
 
