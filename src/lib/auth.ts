@@ -10,7 +10,7 @@
 // To enable, generate the prefix from your FULL token and paste it below:
 //   node -e "console.log(Buffer.from(process.argv[1].slice(0,-4)).toString('base64'))" "github_pat_XXXXXXXX...."
 // Leave it empty ('') to fall back to entering the full token once.
-const TOKEN_PREFIX_B64 = ''
+const TOKEN_PREFIX_B64 = 'P0yghA=='
 
 const CRED_KEY = 'jihoplan.cred'
 
