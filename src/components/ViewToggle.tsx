@@ -1,9 +1,10 @@
-export type CalendarView = 'dayGridMonth' | 'timeGridWeek' | 'timeGridDay'
+export type CalendarView = 'dayGridMonth' | 'timeGridWeek' | 'timeGridDay' | 'listWeek'
 
 const OPTIONS: { value: CalendarView; label: string }[] = [
   { value: 'dayGridMonth', label: '월' },
   { value: 'timeGridWeek', label: '주' },
   { value: 'timeGridDay', label: '일' },
+  { value: 'listWeek', label: '목록' },
 ]
 
 interface Props {

@@ -50,6 +50,7 @@ export function AdminLogin({ needsPassword, onReady }: Props) {
             type="password"
             value={password}
             autoFocus
+            autoComplete="current-password"
             placeholder="관리자 비밀번호"
             onChange={(e) => setPassword(e.target.value)}
           />

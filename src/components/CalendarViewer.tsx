@@ -2,12 +2,14 @@ import { forwardRef } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
+import listPlugin from '@fullcalendar/list'
 import type { EventClickArg, EventInput } from '@fullcalendar/core'
 import type { CalendarView } from './ViewToggle'
 
 interface Props {
   events: EventInput[]
   initialView: CalendarView
+  isMobile: boolean
   onEventClick: (arg: EventClickArg) => void
 }
 
@@ -16,11 +18,11 @@ interface Props {
  * (calendarRef.current.getApi().changeView(...)).
  */
 export const CalendarViewer = forwardRef<FullCalendar, Props>(
-  ({ events, initialView, onEventClick }, ref) => {
+  ({ events, initialView, isMobile, onEventClick }, ref) => {
     return (
       <FullCalendar
         ref={ref}
-        plugins={[dayGridPlugin, timeGridPlugin]}
+        plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
         initialView={initialView}
         locale="ko"
         headerToolbar={{ left: 'prev,next today', center: 'title', right: '' }}
@@ -29,10 +31,21 @@ export const CalendarViewer = forwardRef<FullCalendar, Props>(
         eventClick={onEventClick}
         height="auto"
         nowIndicator
+        scrollTime="09:00:00"
         slotMinTime="06:00:00"
         slotMaxTime="22:00:00"
-        dayMaxEvents={3}
         firstDay={0}
+        // Per-view tuning: month hides the redundant time and caps stacked
+        // events so chips stay readable on small screens.
+        views={{
+          dayGridMonth: {
+            displayEventTime: false,
+            dayMaxEvents: isMobile ? 2 : 3,
+          },
+          listWeek: {
+            listDayFormat: { weekday: 'long', month: 'long', day: 'numeric' },
+          },
+        }}
       />
     )
   },

@@ -4,6 +4,7 @@ import FullCalendar from '@fullcalendar/react'
 import type { EventClickArg } from '@fullcalendar/core'
 import type { EventImpl } from '@fullcalendar/core/internal'
 import { useScheduleData } from '../hooks/useScheduleData'
+import { useIsMobile } from '../hooks/useIsMobile'
 import { toEventInputs } from '../lib/schedule'
 import { CalendarViewer } from '../components/CalendarViewer'
 import { ViewToggle, type CalendarView } from '../components/ViewToggle'
@@ -12,8 +13,10 @@ import { EventDetailPopover } from '../components/EventDetailPopover'
 
 export function ViewerPage() {
   const { data, loading, error, reload } = useScheduleData()
+  const isMobile = useIsMobile()
   const calendarRef = useRef<FullCalendar>(null)
-  const [view, setView] = useState<CalendarView>('dayGridMonth')
+  // Phones default to the list view (far more readable than a 7-column grid).
+  const [view, setView] = useState<CalendarView>(isMobile ? 'listWeek' : 'dayGridMonth')
   const [selected, setSelected] = useState<EventImpl | null>(null)
 
   const events = useMemo(() => toEventInputs(data), [data])
@@ -51,7 +54,13 @@ export function ViewerPage() {
         </p>
       ) : null}
 
-      <CalendarViewer ref={calendarRef} events={events} initialView={view} onEventClick={onEventClick} />
+      <CalendarViewer
+        ref={calendarRef}
+        events={events}
+        initialView={view}
+        isMobile={isMobile}
+        onEventClick={onEventClick}
+      />
 
       <EventDetailPopover event={selected} onClose={() => setSelected(null)} />
     </div>

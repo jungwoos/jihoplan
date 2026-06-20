@@ -332,3 +332,83 @@ textarea {
 .fc .fc-button {
   text-transform: none;
 }
+
+/* Month chips: clip long titles with an ellipsis instead of wrapping/overflowing. */
+.fc-daygrid-event {
+  overflow: hidden;
+}
+
+.fc-daygrid-event .fc-event-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- Mobile (phone) optimizations ---- */
+@media (max-width: 480px) {
+  .page {
+    padding: 10px;
+  }
+
+  .app-header h1 {
+    font-size: 1.1rem;
+  }
+
+  /* Tighter calendar frame to give columns more width. */
+  .fc {
+    padding: 6px;
+  }
+
+  /* Tame the calendar header: one-line title, compact + larger-tap buttons. */
+  .fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 8px;
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 1rem;
+  }
+
+  .fc .fc-button {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    min-height: 44px;
+  }
+
+  /* 44px minimum tap targets. */
+  .view-toggle button {
+    padding: 11px 16px;
+    min-height: 44px;
+  }
+
+  .primary-btn,
+  .ghost-btn,
+  .danger-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Stack toggle and legend instead of cramming them on one row. */
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* 16px form controls prevent iOS Safari from auto-zooming on focus. */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
+  /* Stack start/end datetime fields in the editor. */
+  .field-row {
+    flex-direction: column;
+  }
+}
