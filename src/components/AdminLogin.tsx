@@ -1,23 +1,29 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { setPat } from '../lib/auth'
+import { setPat, usesSplitToken } from '../lib/auth'
 
 interface Props {
   onReady: () => void
 }
 
 export function AdminLogin({ onReady }: Props) {
-  const [pat, setPatValue] = useState('')
+  const split = usesSplitToken()
+  const [cred, setCred] = useState('')
   const [remember, setRemember] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const submitPat = (e: React.FormEvent) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!pat.trim()) {
+    const value = cred.trim()
+    if (split && value.length !== 4) {
+      setError('토큰 마지막 4자리를 입력하세요.')
+      return
+    }
+    if (!split && !value) {
       setError('토큰을 입력하세요.')
       return
     }
-    setPat(pat.trim(), remember)
+    setPat(value, remember)
     onReady()
   }
 
@@ -30,19 +36,21 @@ export function AdminLogin({ onReady }: Props) {
         </Link>
       </header>
 
-      <form className="card" onSubmit={submitPat}>
-        <h2>GitHub 토큰</h2>
+      <form className="card" onSubmit={submit}>
+        <h2>{split ? '토큰 마지막 4자리' : 'GitHub 토큰'}</h2>
         <p className="hint">
-          일정을 저장하려면 저장소 쓰기 권한이 있는 fine-grained 토큰(Contents: Read
-          and write)이 필요합니다. 토큰은 이 브라우저에만 저장되며, 한 번 입력하면 이
-          기기에서는 다시 묻지 않습니다.
+          {split
+            ? '저장소에 저장된 토큰을 완성하기 위한 마지막 4자리만 입력하세요. 한 번 입력하면 이 기기에서는 다시 묻지 않습니다.'
+            : '일정을 저장하려면 저장소 쓰기 권한이 있는 fine-grained 토큰(Contents: Read and write)이 필요합니다. 토큰은 이 브라우저에만 저장됩니다.'}
         </p>
         <input
           type="password"
-          value={pat}
+          value={cred}
           autoFocus
-          placeholder="github_pat_..."
-          onChange={(e) => setPatValue(e.target.value)}
+          maxLength={split ? 4 : undefined}
+          inputMode={split ? 'text' : undefined}
+          placeholder={split ? '••••' : 'github_pat_...'}
+          onChange={(e) => setCred(e.target.value)}
         />
         <label className="checkbox">
           <input
