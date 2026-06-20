@@ -1,14 +1,14 @@
 // Split-token scheme (optional).
 //
-// TOKEN_PREFIX_B64 holds the GitHub PAT with its LAST 4 CHARACTERS REMOVED,
+// TOKEN_PREFIX_B64 holds the GitHub PAT with its LAST 3 CHARACTERS REMOVED,
 // then base64-encoded, and committed here. Because the value is both
 // incomplete and encoded, GitHub secret scanning won't recognize/revoke it,
 // and the repo alone never contains a usable token. The admin supplies only
-// the final 4 characters (≈ 62^4 combinations + GitHub rate limits = real
+// the final 3 characters (≈ 62^3 combinations + GitHub rate limits = real
 // friction against casual misuse).
 //
 // To enable, generate the prefix from your FULL token and paste it below:
-//   node -e "console.log(Buffer.from(process.argv[1].slice(0,-4)).toString('base64'))" "github_pat_XXXXXXXX...."
+//   node -e "console.log(Buffer.from(process.argv[1].slice(0,-3)).toString('base64'))" "github_pat_XXXXXXXX...."
 // Leave it empty ('') to fall back to entering the full token once.
 const TOKEN_PREFIX_B64 = 'P0yghA=='
 

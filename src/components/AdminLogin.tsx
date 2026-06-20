@@ -15,8 +15,8 @@ export function AdminLogin({ onReady }: Props) {
   const submit = (e: React.FormEvent) => {
     e.preventDefault()
     const value = cred.trim()
-    if (split && value.length !== 4) {
-      setError('토큰 마지막 4자리를 입력하세요.')
+    if (split && value.length !== 3) {
+      setError('토큰 마지막 3자리를 입력하세요.')
       return
     }
     if (!split && !value) {
@@ -37,19 +37,19 @@ export function AdminLogin({ onReady }: Props) {
       </header>
 
       <form className="card" onSubmit={submit}>
-        <h2>{split ? '토큰 마지막 4자리' : 'GitHub 토큰'}</h2>
+        <h2>{split ? '토큰 마지막 3자리' : 'GitHub 토큰'}</h2>
         <p className="hint">
           {split
-            ? '저장소에 저장된 토큰을 완성하기 위한 마지막 4자리만 입력하세요. 한 번 입력하면 이 기기에서는 다시 묻지 않습니다.'
+            ? '저장소에 저장된 토큰을 완성하기 위한 마지막 3자리만 입력하세요. 한 번 입력하면 이 기기에서는 다시 묻지 않습니다.'
             : '일정을 저장하려면 저장소 쓰기 권한이 있는 fine-grained 토큰(Contents: Read and write)이 필요합니다. 토큰은 이 브라우저에만 저장됩니다.'}
         </p>
         <input
           type="password"
           value={cred}
           autoFocus
-          maxLength={split ? 4 : undefined}
+          maxLength={split ? 3 : undefined}
           inputMode={split ? 'text' : undefined}
-          placeholder={split ? '••••' : 'github_pat_...'}
+          placeholder={split ? '•••' : 'github_pat_...'}
           onChange={(e) => setCred(e.target.value)}
         />
         <label className="checkbox">
