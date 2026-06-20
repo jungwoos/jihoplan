@@ -4,7 +4,7 @@
   "categories": [
     {
       "id": "school",
-      "label": "학교/유치원",
+      "label": "학교",
       "color": "#4f86c6"
     },
     {
@@ -14,7 +14,7 @@
     },
     {
       "id": "play",
-      "label": "놀이/약속",
+      "label": "놀이",
       "color": "#5cb85c"
     },
     {
