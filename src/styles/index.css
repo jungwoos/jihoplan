@@ -157,6 +157,17 @@ body {
   color: var(--muted);
 }
 
+/* Icon-only ghost button (e.g. admin pencil) — square and centered. */
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  width: 38px;
+  height: 38px;
+  color: var(--muted);
+}
+
 /* Status text */
 .status {
   color: var(--muted);

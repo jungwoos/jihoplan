@@ -34,8 +34,21 @@ export function ViewerPage() {
         <h1>지호</h1>
         <ViewToggle value={view} onChange={changeView} />
         <div className="header-actions">
-          <Link to="/admin" className="ghost-btn">
-            관리자
+          <Link to="/admin" className="ghost-btn icon-link" aria-label="관리자" title="관리자">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 20h9" />
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+            </svg>
           </Link>
         </div>
       </header>
