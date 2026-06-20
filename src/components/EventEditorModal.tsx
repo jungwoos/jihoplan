@@ -13,9 +13,9 @@ interface Props {
 }
 
 // "2026-06-19T16:00:00" <-> datetime-local "2026-06-19T16:00"
-const toLocalInput = (iso: string) => iso.slice(0, 16)
+const toLocalInput = (iso: string | null) => (iso ?? '').slice(0, 16)
 const fromLocalInput = (v: string) => (v.length === 16 ? `${v}:00` : v)
-const toDateInput = (iso: string) => iso.slice(0, 10)
+const toDateInput = (iso: string | null) => (iso ?? '').slice(0, 10)
 
 export function EventEditorModal({
   categories,

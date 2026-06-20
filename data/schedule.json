@@ -56,6 +56,51 @@
       "location": "",
       "notes": "1박 2일",
       "rrule": null
+    },
+    {
+      "id": "evt_hanuri",
+      "title": "한우리",
+      "start": null,
+      "end": null,
+      "allDay": false,
+      "categoryId": "academy",
+      "color": "#e8a33d",
+      "location": "",
+      "notes": "",
+      "daysOfWeek": [2, 4],
+      "startTime": "10:00",
+      "endTime": "11:00",
+      "rrule": null
+    },
+    {
+      "id": "evt_library",
+      "title": "도서관",
+      "start": null,
+      "end": null,
+      "allDay": false,
+      "categoryId": "etc",
+      "color": "#8e7cc3",
+      "location": "",
+      "notes": "",
+      "daysOfWeek": [3, 5],
+      "startTime": "10:00",
+      "endTime": "11:00",
+      "rrule": null
+    },
+    {
+      "id": "evt_lunch",
+      "title": "점심",
+      "start": null,
+      "end": null,
+      "allDay": false,
+      "categoryId": "etc",
+      "color": "#8e7cc3",
+      "location": "",
+      "notes": "",
+      "daysOfWeek": [2, 3, 4, 5],
+      "startTime": "12:00",
+      "endTime": "13:00",
+      "rrule": null
     }
   ]
 }

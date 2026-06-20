@@ -28,18 +28,34 @@ export function colorFor(categoryId: string, categories: Category[]): string {
 
 /** Convert stored events to FullCalendar event inputs. */
 export function toEventInputs(file: ScheduleFile): EventInput[] {
-  return file.events.map((e) => ({
-    id: e.id,
-    title: e.title,
-    start: e.start,
-    end: e.end ?? undefined,
-    allDay: e.allDay,
-    backgroundColor: e.color || colorFor(e.categoryId, file.categories),
-    borderColor: e.color || colorFor(e.categoryId, file.categories),
-    extendedProps: {
-      categoryId: e.categoryId,
-      location: e.location,
-      notes: e.notes,
-    },
-  }))
+  return file.events.map((e) => {
+    const color = e.color || colorFor(e.categoryId, file.categories)
+    const base = {
+      id: e.id,
+      title: e.title,
+      backgroundColor: color,
+      borderColor: color,
+      extendedProps: {
+        categoryId: e.categoryId,
+        location: e.location,
+        notes: e.notes,
+      },
+    }
+    // Weekly-recurring event (FullCalendar native daysOfWeek recurrence).
+    if (e.daysOfWeek && e.daysOfWeek.length) {
+      return {
+        ...base,
+        daysOfWeek: e.daysOfWeek,
+        startTime: e.startTime ?? undefined,
+        endTime: e.endTime ?? undefined,
+      }
+    }
+    // One-time event.
+    return {
+      ...base,
+      start: e.start ?? undefined,
+      end: e.end ?? undefined,
+      allDay: e.allDay,
+    }
+  })
 }
