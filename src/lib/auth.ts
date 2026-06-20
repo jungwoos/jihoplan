@@ -10,11 +10,11 @@
 // To enable, generate the prefix from your FULL token and paste it below:
 //   node -e "console.log(Buffer.from(process.argv[1].slice(0,-3)).toString('base64'))" "github_pat_XXXXXXXX...."
 // Leave it empty ('') to fall back to entering the full token once.
-const TOKEN_PREFIX_B64 = 'github_pat_11ACDQWWQ04jhw9LeONA1r_JB1chqyYitYnhGPiXEElkGgwqEpSasVNy80Ri9Upzh86NMHS5LYCk85B'
+const TOKEN_PREFIX_B64 = ''
 
 const CRED_KEY = 'jihoplan.cred'
 
-/** True when a token prefix is baked in → the admin enters only 4 characters. */
+/** True when a token prefix is baked in → the admin enters only 3 characters. */
 export function usesSplitToken(): boolean {
   return TOKEN_PREFIX_B64.length > 0
 }
@@ -29,7 +29,7 @@ function decodePrefix(): string {
   }
 }
 
-// The credential the admin supplies: the last 4 chars (split mode) or the full
+// The credential the admin supplies: the last 3 chars (split mode) or the full
 // token (fallback). Stored only in this browser.
 export function getPat(): string | null {
   const cred = localStorage.getItem(CRED_KEY) ?? sessionStorage.getItem(CRED_KEY)
