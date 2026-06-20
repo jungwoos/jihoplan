@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { checkPassword, setPat } from '../lib/auth'
+import { checkPassword, getPat, setPat } from '../lib/auth'
 
 interface Props {
   needsPassword: boolean
@@ -10,7 +10,7 @@ interface Props {
 export function AdminLogin({ needsPassword, onReady }: Props) {
   const [password, setPassword] = useState('')
   const [pat, setPatValue] = useState('')
-  const [remember, setRemember] = useState(false)
+  const [remember, setRemember] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [unlocked, setUnlocked] = useState(!needsPassword)
 
@@ -18,6 +18,11 @@ export function AdminLogin({ needsPassword, onReady }: Props) {
     e.preventDefault()
     setError(null)
     if (await checkPassword(password)) {
+      // A token already saved on this device → skip the token step entirely.
+      if (getPat()) {
+        onReady()
+        return
+      }
       setUnlocked(true)
     } else {
       setError('비밀번호가 올바르지 않습니다.')
