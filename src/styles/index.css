@@ -333,6 +333,11 @@ textarea {
   text-transform: none;
 }
 
+/* Compact timegrid: shrink each 30-min slot row from the 24px default to 20px. */
+.fc .fc-timegrid-slot {
+  height: 20px;
+}
+
 /* Month chips: clip long titles with an ellipsis instead of wrapping/overflowing. */
 .fc-daygrid-event {
   overflow: hidden;
