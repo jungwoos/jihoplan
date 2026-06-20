@@ -31,6 +31,7 @@ export const CalendarViewer = forwardRef<FullCalendar, Props>(
         eventClick={onEventClick}
         height="auto"
         nowIndicator
+        allDaySlot={false}
         // Show only the title on event chips (no time). The list view keeps its
         // own dedicated time column (re-enabled in `views` below).
         displayEventTime={false}
