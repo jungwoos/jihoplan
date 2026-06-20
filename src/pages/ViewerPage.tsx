@@ -15,8 +15,8 @@ export function ViewerPage() {
   const { data, loading, error } = useScheduleData()
   const isMobile = useIsMobile()
   const calendarRef = useRef<FullCalendar>(null)
-  // Phones default to the list view (far more readable than a 7-column grid).
-  const [view, setView] = useState<CalendarView>(isMobile ? 'listWeek' : 'dayGridMonth')
+  // Phones default to the week view; desktop opens on the month overview.
+  const [view, setView] = useState<CalendarView>(isMobile ? 'timeGridWeek' : 'dayGridMonth')
   const [selected, setSelected] = useState<EventImpl | null>(null)
 
   const events = useMemo(() => toEventInputs(data), [data])
